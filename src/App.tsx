@@ -1,12 +1,17 @@
 import '@mantine/core/styles.css';
-import { MantineProvider } from '@mantine/core';
-import { Router } from './Router';
-import { theme } from './theme';
+import {Loader, MantineProvider} from '@mantine/core';
+import {Router} from './Router';
+import {theme} from './theme';
+import {Notifications} from "@mantine/notifications";
+import {Suspense} from "react";
 
 export default function App() {
   return (
     <MantineProvider theme={theme}>
-      <Router />
+      <Notifications/>
+      <Suspense fallback={<Loader/>}>
+        <Router/>
+      </Suspense>
     </MantineProvider>
   );
 }

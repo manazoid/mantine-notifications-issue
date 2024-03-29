@@ -1,13 +1,17 @@
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { HomePage } from './pages/Home.page';
+import {createBrowserRouter, createRoutesFromElements, Route, RouterProvider} from 'react-router-dom';
+import {lazy} from "react";
+import RootLayoutPage from "@/pages/RootLayout.page";
 
-const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <HomePage />,
-  },
-]);
+const HomePage = lazy(() => import("./pages/Home.page"))
+
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route path={"/"} element={<RootLayoutPage/>}>
+      <Route index element={<HomePage/>}/>
+    </Route>
+  )
+);
 
 export function Router() {
-  return <RouterProvider router={router} />;
+  return <RouterProvider router={router}/>;
 }
